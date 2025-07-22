@@ -20,25 +20,25 @@ variables:
   resourceGroup: 'maven-app'  
 
 stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/dockerfile'
-        tags: |
-          $(tag)
+# - stage: Build
+#   displayName: Build image
+#   jobs:
+#   - job: Build
+#     displayName: Build
+#     steps:
+#     - task: Docker@2
+#       displayName: Build an image
+#       inputs:
+#         command: build
+#         dockerfile: '$(Build.SourcesDirectory)/dockerfile'
+#         tags: |
+#           $(tag)
 
 #-- Deploy CD --
 
 - stage: Deploy
   displayName: 'Deploy to Azure Container Apps'
-  dependsOn: Build
+  # dependsOn: Build
   jobs:
     - job: DeployToACA
       displayName: 'Deploy Microservices to ACA'
@@ -56,6 +56,8 @@ stages:
             scriptLocation: inlineScript
             inlineScript: |
               az config set extension.use_dynamic_install=yes_without_prompt
+
+              az group create --name dotnet-app --location eastasia
 
               az containerapp env create \
                 --name dotnet-env \
