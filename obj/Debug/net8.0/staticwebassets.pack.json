@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/home/ubuntu/Desktop/ASP.NET-Core-Web-Database-Application/obj/Debug/net8.0/scopedcss/projectbundle/JokesWebApp.bundle.scp.css",
+      "PackagePath": "staticwebassets/JokesWebApp.bundle.scp.css"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.JokesWebApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.JokesWebApp.props",
+      "PackagePath": "build\\JokesWebApp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.JokesWebApp.props",
+      "PackagePath": "buildMultiTargeting\\JokesWebApp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.JokesWebApp.props",
+      "PackagePath": "buildTransitive\\JokesWebApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
