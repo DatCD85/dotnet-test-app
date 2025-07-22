@@ -17,7 +17,7 @@ variables:
   dockerRegistryServiceConnection: 'dockerhub'
   dockerUsername: 'chudat753'
   azureSubscription: 'Azure-app'
-  resourceGroup: 'maven-app'  
+  resourceGroup: 'dotnet-app'  
 
 stages:
 # - stage: Build
@@ -61,7 +61,7 @@ stages:
 
               az containerapp env create \
                 --name dotnet-env \
-                --resource-group dotnet-app \
+                --resource-group $(resourceGroup) \
                 --location eastasia
               
               echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
