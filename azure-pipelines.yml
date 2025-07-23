@@ -1,0 +1,77 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+pool:
+  name: 'test-pool'
+  vmImage: ubuntu-latest
+  
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+  dockerRegistryServiceConnection: 'dockerhub'
+  dockerUsername: 'chudat753'
+  azureSubscription: 'Azure-app'
+  resourceGroup: 'dotnet-app'  
+
+stages:
+# - stage: Build
+#   displayName: Build image
+#   jobs:
+#   - job: Build
+#     displayName: Build
+#     steps:
+#     - task: Docker@2
+#       displayName: Build an image
+#       inputs:
+#         command: build
+#         dockerfile: '$(Build.SourcesDirectory)/dockerfile'
+#         tags: |
+#           $(tag)
+
+#-- Deploy CD --
+
+- stage: Deploy
+  displayName: 'Deploy to Azure Container Apps'
+  # dependsOn: Build
+  jobs:
+    - job: DeployToACA
+      displayName: 'Deploy Microservices to ACA'
+      strategy:
+        matrix:
+          dotnet-app:
+            imageName: 'dotnet-app'
+            
+      steps:
+        - task: AzureCLI@2
+          displayName: 'Deploy $(imageName) to Azure Container Apps'
+          inputs:
+            azureSubscription: $(azureSubscription)
+            scriptType: bash
+            scriptLocation: inlineScript
+            inlineScript: |
+              az config set extension.use_dynamic_install=yes_without_prompt
+
+              az group create --name dotnet-app --location eastasia
+
+              az containerapp env create \
+                --name dotnet-env \
+                --resource-group $(resourceGroup) \
+                --location eastasia
+              
+              echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
+
+              az containerapp create \
+                --name $(imageName) \
+                --resource-group $(resourceGroup) \
+                --image docker.io/$(dockerUsername)/$(imageName):latest \
+                --container-name $(imageName) \
+                --environment dotnet-env
+
+
+                
