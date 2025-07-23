@@ -63,8 +63,8 @@ stages:
                 --name dotnet-env \
                 --resource-group $(resourceGroup) \
                 --location eastasia \
-                --admin-user myadmin \
-                --admin-password MySecurePassword123!
+                --admin-user $(SqlAdminUser) \
+                --admin-password $(SqlPassword)
               
               echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
 
