@@ -76,4 +76,5 @@ stages:
               
               az sql db create -g $(resourceGroup) \
                 -n dotnet-app-db \
-                -s dotnet-db
+                -s dotnet-db \
+                --backup-storage-redundancy Local
