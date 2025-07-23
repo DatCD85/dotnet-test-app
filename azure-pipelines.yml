@@ -74,7 +74,6 @@ stages:
                 --ingress external \
                 --environment dotnet-env
               
-              az sql db create --name dotnet-app-db
-                --resource-group $(resourceGroup)
+              az sql db create -g $(resourceGroup)
+                -n dotnet-app-db
                 --service-objective S0
-                
