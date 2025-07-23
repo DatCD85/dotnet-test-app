@@ -76,4 +76,4 @@ stages:
               
               az sql db create -g $(resourceGroup)
                 -n dotnet-app-db
-                --service-objective S0
+                -s dotnet-db
