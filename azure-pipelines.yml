@@ -62,7 +62,9 @@ stages:
               az containerapp env create \
                 --name dotnet-env \
                 --resource-group $(resourceGroup) \
-                --location eastasia
+                --location eastasia \
+                --admin-user myadmin \
+                --admin-password MySecurePassword123!
               
               echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
 
