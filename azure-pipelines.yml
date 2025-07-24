@@ -56,6 +56,10 @@ stages:
             scriptLocation: inlineScript
             inlineScript: |
               az config set extension.use_dynamic_install=yes_without_prompt
+              
+              if [ "$(az group exists --name $(resourceGroup))" = "false" ]; then
+              az group create --name $(resourceGroup) --location eastasia
+              fi
 
               az group create --name dotnet-app --location eastasia
 
