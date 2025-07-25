@@ -66,9 +66,7 @@ stages:
               az containerapp env create \
                 --name dotnet-env \
                 --resource-group $(resourceGroup) \
-                --location eastasia \
-                --admin-user $(SqlAdminUser) \
-                --admin-password $(SqlPassword)
+                --location eastasia
               
               echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
 
@@ -85,3 +83,5 @@ stages:
                 -n dotnet-app-db \
                 -s dotnet-db \
                 --backup-storage-redundancy Local
+                --admin-user $(SqlAdminUser) \
+                --admin-password $(SqlPassword)
