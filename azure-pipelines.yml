@@ -83,5 +83,3 @@ stages:
                 -n dotnet-app-db \
                 -s dotnet-db \
                 --backup-storage-redundancy Local
-                --admin-user $(SqlAdminUser) \
-                --admin-password $(SqlPassword)
