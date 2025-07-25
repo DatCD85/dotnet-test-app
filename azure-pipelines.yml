@@ -77,7 +77,9 @@ stages:
                 --container-name $(imageName) \
                 --ingress external \
                 --environment dotnet-env \
-                --log-analytics-workspace log-workspace-dotnet-app
+                # --log-analytics-workspace log-workspace-dotnet-app
+
+                
               
               az sql db create -g $(resourceGroup) \
                 -n dotnet-app-db \
