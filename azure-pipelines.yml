@@ -78,10 +78,21 @@ stages:
                 --ingress external \
                 --environment dotnet-env
                 # --log-analytics-workspace log-workspace-dotnet-app
-
-                
               
-              az sql db create -g $(resourceGroup) \
-                -n dotnet-app-db \
-                -s dotnet-db \
-                --backup-storage-redundancy Local
+              # az sql db create -g $(resourceGroup) \
+              #   -n dotnet-app-db \
+              #   -s dotnet-db \
+              #   --backup-storage-redundancy Local
+
+        - task: SqlAzureDacpacDeployment@1
+          inputs:
+            azureSubscription: 'Azure for Students(d41d012b-68bf-4681-ae55-4d3cc967f905)'
+            AuthenticationType: 'server'
+            ServerName: 'dotnet-db'
+            DatabaseName: 'dotnet-app-db'
+            SqlUsername: '$(SqlAdminUser)'
+            SqlPassword: '$(SqlPassword)'
+            deployType: 'DacpacTask'
+            DeploymentAction: 'Publish'
+            DacpacFile: '$(agent.releaseDirectory)'
+            IpDetectionMethod: 'AutoDetect'
