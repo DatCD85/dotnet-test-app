@@ -76,12 +76,11 @@ stages:
                 --image docker.io/$(dockerUsername)/$(imageName):latest \
                 --container-name $(imageName) \
                 --ingress external \
-                --environment dotnet-env
-                # --log-analytics-workspace log-workspace-dotnet-app
-
-                
+                --environment dotnet-env \
+                --log-analytics-workspace log-workspace-dotnet-app
               
               az sql db create -g $(resourceGroup) \
                 -n dotnet-app-db \
                 -s dotnet-db \
                 --backup-storage-redundancy Local
+
