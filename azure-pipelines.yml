@@ -105,5 +105,5 @@ stages:
         #     imageToDeploy: 'docker.io/$(dockerUsername)/$(imageName):latest'
         #     containerAppEnvironment: 'dotnet-env'
         #     ingress: 'external'
-        #     environmentVariables: ''
+        #    environmentVariables: ''
 
