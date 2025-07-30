@@ -72,28 +72,28 @@ stages:
               
               echo "Deploying docker.io/$(dockerUsername)/$(imageName):$(Build.BuildId) to Azure Container App..."
 
-              # az containerapp create \
-              #   --name $(imageName) \
-              #   --resource-group $(resourceGroup) \
-              #   --image docker.io/$(dockerUsername)/$(imageName):latest \
-              #   --container-name $(imageName) \
-              #   --ingress external \
-              #   --environment dotnet-env \
-              #   --log-analytics-workspace log-workspace-dotnet-app
+              az containerapp create \
+                --name $(imageName) \
+                --resource-group $(resourceGroup) \
+                --image docker.io/$(dockerUsername)/$(imageName):latest \
+                --container-name $(imageName) \
+                --ingress external \
+                --environment dotnet-env \
+                --log-analytics-workspace log-workspace-dotnet-app
               
               az sql db create -g $(resourceGroup) \
                 -n dotnet-app-db \
                 -s dotnet-db \
                 --backup-storage-redundancy Local
 
-        - task: AzureContainerApps@1
-          displayName: 'Deploy Azure Container App'
-          inputs:
-            azureSubscription: '$(azureSubscription)'
-            containerAppName: '$(imageName)'
-            resourceGroup: '$(resourceGroup)'
-            imageToDeploy: 'docker.io/$(dockerUsername)/$(imageName):latest'
-            containerAppEnvironment: 'dotnet-env'
-            ingress: 'external'
-            environmentVariables: ''
+        # - task: AzureContainerApps@1
+        #   displayName: 'Deploy Azure Container App'
+        #   inputs:
+        #     azureSubscription: '$(azureSubscription)'
+        #     containerAppName: '$(imageName)'
+        #     resourceGroup: '$(resourceGroup)'
+        #     imageToDeploy: 'docker.io/$(dockerUsername)/$(imageName):latest'
+        #     containerAppEnvironment: 'dotnet-env'
+        #     ingress: 'external'
+        #     environmentVariables: ''
 
