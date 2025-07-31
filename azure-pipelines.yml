@@ -8,7 +8,7 @@
 trigger: none
 
 pool:
-  name: 'test-pool'
+  name: 'Azure Pipelines'
   vmImage: ubuntu-latest
   
 resources:
@@ -106,4 +106,3 @@ stages:
         #     containerAppEnvironment: 'dotnet-env'
         #     ingress: 'external'
         #    environmentVariables: ''
-
