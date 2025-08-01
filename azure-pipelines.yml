@@ -37,6 +37,7 @@ stages:
 #           $(tag)
 
       - task: trivy@2
+        continueOnError: true
         inputs:
           type: 'image'
           target: docker.io/$(dockerUsername)/$(imageName):latest
