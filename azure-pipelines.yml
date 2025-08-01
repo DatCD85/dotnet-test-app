@@ -46,6 +46,8 @@ stages:
           type: 'image'
           target: docker.io/$(dockerUsername)/$(imageName):latest
       
+      
+      
 #-- Deploy CD --
 
 - stage: Deploy
